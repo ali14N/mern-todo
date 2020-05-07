@@ -12,9 +12,7 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, useCrea
         console.log("DB Connected")
     })
     .catch(err => console.log("Error: " + err))
-const usersRoute = require('./routes/users')
 const todosRoute = require('./routes/todos')
-app.use('/users', usersRoute)
 app.use('/todos', todosRoute)
 app.listen(port, () => {
     console.log(`Server started on port ${port}`)

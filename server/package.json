@@ -4,7 +4,10 @@
   "description": "Todo App",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "client": "cd ../client && npm start",
+    "dev": "concurrently -n \"server,client\" -c \"blue,green\" \"npm start\" \"npm run client\""
   },
   "repository": {
     "type": "git",
