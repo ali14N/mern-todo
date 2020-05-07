@@ -23,9 +23,10 @@ function App() {
     const newValue = event.target.value;
     setInputText(newValue);
   }
-  function addItem() {
+  function addItem(event) {
+    event.preventDefault()
     setItems(prevItems => {
-      return [...prevItems, { text: inputText }];
+      return [...prevItems, { todo: inputText }];
     });
     const payload = {
       text: inputText
@@ -34,16 +35,14 @@ function App() {
       url: '/todos/add',
       method: 'POST',
       data: payload
-    }).then(() => console.log("Data has been sent to Server"))
+    }).then(() => getTodos())
       .catch(err => console.log("Error: " + err))
     setInputText("");
   }
   function deleteItem(id) {
-    setItems(prevItems => {
-      return prevItems.filter((item, index) => {
-        return index !== id;
-      });
-    });
+    axios.delete('/todos/' + id)
+      .then(() => getTodos())
+      .catch(err => console.log("Error while deleting: " + err))
   }
   return (
     <div className="container">
@@ -60,9 +59,8 @@ function App() {
           {items.map((todoItem, index) => (
             <ToDoItem
               key={index}
-              id={index}
               todoItem={todoItem}
-              onChecked={deleteItem}
+              deleteItem={deleteItem}
             />
           ))}
         </ul>

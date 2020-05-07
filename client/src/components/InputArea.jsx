@@ -1,7 +1,7 @@
 import React from "react";
 function InputArea(props) {
     return (
-        <div className="form">
+        <form className="form">
             <input
                 onChange={props.handleChange}
                 type="text"
@@ -10,7 +10,7 @@ function InputArea(props) {
             <button onClick={props.addItem}>
                 <span>Add</span>
             </button>
-        </div>
+        </form>
     );
 }
 export default InputArea;
